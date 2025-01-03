@@ -3,11 +3,10 @@ import React from 'react'
 import styles from '@/styles/auth.module.css'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation';
-import { AppDispatch, useAppSelector } from '@/redux/store';
+import { AppDispatch } from '@/redux/store';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { logIn, logOut } from '@/redux/features/auth-slice';
-import axios from 'axios';
 
 interface FormData {
 
@@ -18,7 +17,6 @@ interface FormData {
 
 const Page = () => {
   const router = useRouter()
-  const auth = useAppSelector((state) => state.authReducer)
   const dispatch = useDispatch<AppDispatch>()
 
   const [formData, setFormData] = React.useState<FormData>({
@@ -41,8 +39,8 @@ const Page = () => {
       return
     }
 
-    let res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/auth/login', {
-      method: 'POST', 
+    const res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/auth/login', {
+      method: 'POST',
       body: JSON.stringify({
         email: formData.email,
         password: formData.password
@@ -55,9 +53,8 @@ const Page = () => {
       credentials: 'include'
     })
 
-    let data = await res.json()
+    const data = await res.json()
     if (data.ok) {
-
       toast.success('Login Success')
       getUserData()
     }
@@ -66,7 +63,7 @@ const Page = () => {
     }
   }
   const getUserData = async () => {
-    let res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/auth/getuser', {
+    const res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/auth/getuser', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -75,7 +72,7 @@ const Page = () => {
       },
       credentials: 'include'
     })
-    let data = await res.json()
+    const data = await res.json()
     if (data.ok) {
       dispatch(logIn(data.data))
       router.push('/myfiles')

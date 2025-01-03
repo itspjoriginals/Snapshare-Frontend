@@ -9,9 +9,6 @@ interface FormData {
   password: string,
 }
 
-
-
-
 const Page = () => {
 
   const [formData, setFormData] = useState<FormData>({
@@ -27,7 +24,7 @@ const Page = () => {
   const [sendingOtp, setSendingOtp] = useState<boolean>(false)
   const sendOtp = async () => {
     setSendingOtp(true)
-    let res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/auth/sendotp', {
+    const res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/auth/sendotp', {
       method: 'POST',
       body: JSON.stringify({ email: formData.email }),
       headers: {
@@ -36,7 +33,7 @@ const Page = () => {
       credentials: 'include'
     })
 
-    let data = await res.json()
+    const data = await res.json()
     setSendingOtp(false)
 
     if (data.ok) {
@@ -61,7 +58,7 @@ const Page = () => {
 
 
 
-    let res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/auth/changepassword', {
+    const res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/auth/changepassword', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -70,7 +67,7 @@ const Page = () => {
       credentials: 'include'
     })
 
-    let data = await res.json()
+    const data = await res.json()
     if (data.ok) {
       toast.success('Password changed')
       Router.push('/login')

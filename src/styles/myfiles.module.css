@@ -1,39 +1,50 @@
 .allfiles {
-    background-color: black;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
     margin: 20px;
+    padding: 15px;
     height: 80vh;
     overflow-y: auto;
+    border-radius: 15px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
 }
 
 .allfiles table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .allfiles th,
 .allfiles td {
-    /* border: 1px solid #ddd; */
-    padding: 8px;
+    padding: 10px;
     text-align: left;
+    color: white;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .allfiles th {
-    background-color: black;
-    color: white;
+    background: rgba(0, 0, 0, 0.7);
+    font-size: 1.1rem;
+    text-transform: uppercase;
 }
 
-
-.allfiles tr {
-    background-color: white;
-    border: 2px solid black;
-    box-sizing: border-box;
+.allfiles tr:hover {
+    background: rgba(255, 255, 255, 0.1);
 }
-
 
 .allfiles td svg {
     margin-right: 5px;
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.allfiles td svg:hover {
+    transform: scale(1.2);
 }

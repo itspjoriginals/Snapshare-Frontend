@@ -1,13 +1,9 @@
 "use client"
-import Image from "next/image";
 import styles from "./page.module.css";
-import { useDispatch } from "react-redux";
-import { AppDispatch, useAppSelector } from "@/redux/store";
+import { useAppSelector } from "@/redux/store";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
-
-  const dispatch = useDispatch<AppDispatch>()
   const auth = useAppSelector((state) => state.authReducer)
   const router = useRouter()
 

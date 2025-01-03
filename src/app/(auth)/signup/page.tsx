@@ -34,7 +34,7 @@ const Page = () => {
 
   const sendOtp = async () => {
     setSendingOtp(true)
-    let res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/auth/sendotp', {
+    const res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/auth/sendotp', {
       method: 'POST',
       body: JSON.stringify({ email: formData.email }),
       headers: {
@@ -43,7 +43,7 @@ const Page = () => {
       credentials: 'include'
     })
 
-    let data = await res.json()
+    const data = await res.json()
     setSendingOtp(false)
 
     if (data.ok) {
@@ -57,11 +57,11 @@ const Page = () => {
 
 
   const generatepostobjecturl = async () => {
-    let res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/auth/generatepostobjecturl', {
+    const res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/auth/generatepostobjecturl', {
       method: 'GET',
       credentials: 'include',
     })
-    let data = await res.json()
+    const data = await res.json()
     if (data.ok) {
       console.log(data.data.signedUrl)
       return data.data
@@ -72,19 +72,19 @@ const Page = () => {
     }
 
   }
-  const uploadtos3byurl = async (url: any) => {
+  const uploadtos3byurl = async (url: string) => {
     const options = {
       method: 'PUT',
       body: imageFile,
     };
 
-    let res = await fetch(url, options)
+    const res = await fetch(url, options)
     if (res.ok) {
-      // toast.success('File uploaded successfully');
+
       return true
     }
     else {
-      // toast.error('Failed to upload file')
+
       return false
     }
   }
@@ -94,31 +94,30 @@ const Page = () => {
       return
     }
 
-
-    let s3urlobj = await generatepostobjecturl()
+    const s3urlobj = await generatepostobjecturl()
 
     if (!s3urlobj) {
       toast.error('Failed to upload image')
       return;
     }
 
-    let filekey = s3urlobj.filekey;
-    let s3url = s3urlobj.signedUrl
-    let uploaded = await uploadtos3byurl(s3url)
+    const filekey = s3urlobj.filekey;
+    const s3url = s3urlobj.signedUrl
+    const uploaded = await uploadtos3byurl(s3url)
 
     if (!uploaded) {
       toast.error('Failed to upload image')
       return;
     }
 
-    let singupdetails = {
+    const singupdetails = {
       name: formData.name,
       email: formData.email,
       password: formData.password,
       otp: otp,
       profilePic: filekey
     }
-    let res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/auth/register', {
+    const res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/auth/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -127,7 +126,7 @@ const Page = () => {
       credentials: 'include'
     })
 
-    let data = await res.json()
+    const data = await res.json()
     if (data.ok) {
       toast.success('Signup successful')
       Router.push('/login')
