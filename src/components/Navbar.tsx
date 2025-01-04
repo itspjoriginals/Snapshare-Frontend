@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import styles from "@/styles/navbar.module.css";
 import { useDispatch } from "react-redux";
@@ -11,6 +11,7 @@ const Navbar = () => {
   const auth = useAppSelector((state) => state.authReducer);
   const router = useRouter();
   const pathname = usePathname();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const getUserData = useCallback(async () => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/getuser`, {
@@ -46,6 +47,12 @@ const Navbar = () => {
     checkLogin();
   }, [checkLogin]);
 
+  // Close the menu when navigating to a new route
+  const handleNavigation = (route: string) => {
+    router.push(route);
+    setIsMenuOpen(false); // Close the menu
+  };
+
   const handleLogout = async () => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`, {
       method: "POST",
@@ -56,50 +63,60 @@ const Navbar = () => {
     if (data.ok) {
       dispatch(logOut());
       router.push("/login");
+      setIsMenuOpen(false); // Close the menu
     }
   };
 
   return (
     <div className={styles.navbar}>
       <h1
-        onClick={() => router.push("/")}
+        onClick={() => handleNavigation("/")}
         className={styles.logo}
       >
         SnapShare
       </h1>
 
-      {auth.isAuth ? (
-        <div className={styles.right}>
-          <p
-            onClick={() => router.push("/myfiles")}
-            className={pathname === "/myfiles" ? styles.active : ""}
-          >
-            My Files
-          </p>
-          <p
-            onClick={() => router.push("/share")}
-            className={pathname === "/share" ? styles.active : ""}
-          >
-            Share
-          </p>
-          <p onClick={handleLogout}>Logout</p>
-        </div>
-      ) : (
-        <div className={styles.right}>
-          <p
-            onClick={() => router.push("/login")}
-            className={pathname === "/login" ? styles.active : ""}
-          >
-            Login
-          </p>
-          <p
-            onClick={() => router.push("/signup")}
-            className={pathname === "/signup" ? styles.active : ""}
-          >
-            Signup
-          </p>
-        </div>
-      )}
+      <div
+        className={styles.toggle}
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+      >
+        ☰
+      </div>
+
+      <div className={`${styles.right} ${isMenuOpen ? styles.open : ""}`}>
+        {auth.isAuth ? (
+          <>
+            <p
+              onClick={() => handleNavigation("/myfiles")}
+              className={pathname === "/myfiles" ? styles.active : ""}
+            >
+              My Files
+            </p>
+            <p
+              onClick={() => handleNavigation("/share")}
+              className={pathname === "/share" ? styles.active : ""}
+            >
+              Share
+            </p>
+            <p onClick={handleLogout}>Logout</p>
+          </>
+        ) : (
+          <>
+            <p
+              onClick={() => handleNavigation("/login")}
+              className={pathname === "/login" ? styles.active : ""}
+            >
+              Login
+            </p>
+            <p
+              onClick={() => handleNavigation("/signup")}
+              className={pathname === "/signup" ? styles.active : ""}
+            >
+              Signup
+            </p>
+          </>
+        )}
+      </div>
     </div>
   );
 };
