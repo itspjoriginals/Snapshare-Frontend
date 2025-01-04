@@ -48,3 +48,20 @@
 .allfiles td svg:hover {
     transform: scale(1.2);
 }
+
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .allfiles {
+        margin: 10px;
+        padding: 10px;
+        height: auto;
+    }
+
+    .allfiles th,
+    .allfiles td {
+        font-size: 0.8rem;
+        padding: 8px;
+    }
+}
