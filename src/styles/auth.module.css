@@ -93,7 +93,7 @@
     color: #feb47b;
 }
 
-/* Specific styles for OTP input and button */
+
 .inputcontaner1 {
     display: flex;
     flex-direction: column;
@@ -203,28 +203,28 @@
 }
 
 .filecard .right svg {
-    width: 20px; /* Reduced size */
+    width: 20px;
     height: 20px;
-    color: rgba(0, 0, 0, 0.7); /* Neutral color */
+    color: rgba(0, 0, 0, 0.7);
     cursor: pointer;
-    transition: transform 0.3s, color 0.3s; /* Smooth hover animation */
+    transition: transform 0.3s, color 0.3s;
 }
 
 .filecard .right svg:hover {
-    transform: scale(1.2); /* Slight zoom on hover */
-    color: #af4261; /* Accent color on hover */
+    transform: scale(1.2);
+    color: #af4261;
 }
 
 .uploadpopup {
-    position: fixed; /* Ensure it stays fixed in the viewport */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent overlay */
+    background-color: rgba(0, 0, 0, 0.7);
     display: flex;
-    align-items: center; /* Center vertically */
-    justify-content: center; /* Center horizontally */
+    align-items: center;
+    justify-content: center;
     z-index: 100;
     flex-direction: column;
 }
@@ -278,3 +278,18 @@
     }
 }
 
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .authcontainer {
+        width: 90%;
+    }
+
+    .authpage h1 {
+        font-size: 1.8rem;
+    }
+
+    .dropzone {
+        height: 150px;
+    }
+}
