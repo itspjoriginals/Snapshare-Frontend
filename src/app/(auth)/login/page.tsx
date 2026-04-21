@@ -18,7 +18,6 @@ const Page = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [focused, setFocused] = useState<string | null>(null)
 
   const [formData, setFormData] = React.useState<FormData>({
     email: '',

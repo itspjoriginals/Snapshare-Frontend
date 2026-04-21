@@ -27,6 +27,7 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
                     dispatch(logOut());
                 }
             } catch (err) {
+                console.log(err);
                 dispatch(logOut());
             } finally {
                 setLoading(false);

@@ -535,7 +535,7 @@ const Page = () => {
                 </div>
               </div>
             ) : (
-              filtered.map((file, index) => {
+              filtered.map((file) => {
                 const badgeColor = getTypeBadgeColor(file.fileType);
                 const sent = isSentByMe(file);
                 return (
