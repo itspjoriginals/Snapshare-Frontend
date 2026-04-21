@@ -30,7 +30,7 @@ const Navbar = () => {
   }, [dispatch, router]);
 
   const checkLogin = useCallback(async () => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/checklogin`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/checkLogin`, {
       method: "GET",
       credentials: "include",
     });
