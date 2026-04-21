@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { logIn, logOut } from "@/redux/features/auth-slice";
+import Snaploader from "./Snaploader";
 
 export default function AuthProvider({ children }: { children: React.ReactNode }) {
     const dispatch = useDispatch();
@@ -38,7 +39,9 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
     }, [dispatch]);
 
     if (loading) {
-        return <div style={{ textAlign: "center", marginTop: "100px" }}>Loading...</div>;
+        return <div style={{ textAlign: "center", marginTop: "100px" }}>
+            <Snaploader />
+        </div>;
     }
 
     return <>{children}</>;
