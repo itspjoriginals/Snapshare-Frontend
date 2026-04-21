@@ -587,8 +587,10 @@ const Page = () => {
 
             {/* Signup nudge */}
             <div className="signup-nudge">
-              Don&apos;t have an account?
-              <Link href="/signup" className="signup-link">Create one free →</Link>
+              Don&apos;t have an account?{" "}
+              <Link href="/signup" className="signup-link">
+                Create one free →
+              </Link>
             </div>
 
             {/* Security footnote */}
